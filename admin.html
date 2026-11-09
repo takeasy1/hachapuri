@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Хачапури — Панель управления</title>
+  <link rel="stylesheet" href="shared.css">
+</head>
+<body data-page="admin" class="admin-page">
+
+  <div class="admin-login-view" id="adminLoginView">
+    <div class="login-card">
+      <div class="lock-icon">🔐</div>
+      <h2>Вход в панель</h2>
+      <p>Панель управления ресторана «Хачапури»</p>
+      <input type="text" id="loginUser" placeholder="Логин" autocomplete="username">
+      <input type="password" id="loginPass" placeholder="Пароль" autocomplete="current-password">
+      <div class="login-error" id="loginError"></div>
+      <button class="btn" id="loginBtn">Войти</button>
+      <a href="index.html" class="login-back" style="display:block;text-align:center;text-decoration:none">← Вернуться на сайт</a>
+    </div>
+  </div>
+
+  <div class="admin-panel-view" id="adminPanelView">
+    <div class="admin-header">
+      <h2><span class="dot"></span> Панель управления</h2>
+      <div class="admin-header-actions">
+        <div class="current-user" id="currentUserInfo"></div>
+        <button class="btn btn-ghost btn-sm" id="adminLogout">Выйти</button>
+        <a href="index.html" class="btn btn-sm" style="text-decoration:none">На сайт</a>
+      </div>
+    </div>
+
+    <div class="admin-tabs" id="adminTabs"></div>
+
+    <div class="admin-content">
+      <div class="admin-tab-content" id="tab-dashboard">
+        <div class="stats-grid" id="statsGrid"></div>
+        <div class="chart-card">
+          <h3>Выручка за 7 дней <span class="chart-total" id="chartTotal"></span></h3>
+          <div class="bar-chart" id="barChart"></div>
+          <div class="bar-labels" id="barLabels"></div>
+        </div>
+      </div>
+
+      <div class="admin-tab-content" id="tab-orders">
+        <div class="orders-filters" id="ordersFilters"></div>
+        <div id="ordersList"></div>
+      </div>
+
+      <div class="admin-tab-content" id="tab-menu">
+        <div class="admin-form-card">
+          <h3 id="menuFormTitle">➕ Добавить блюдо</h3>
+          <form id="menuItemForm">
+            <div class="form-grid">
+              <div class="form-group"><label>Эмодзи</label><input type="text" id="mi-emoji" maxlength="4" value="🥟"></div>
+              <div class="form-group"><label>Название *</label><input type="text" id="mi-title" placeholder="Хачапури..." required></div>
+              <div class="form-group"><label>Описание</label><input type="text" id="mi-desc" placeholder="Кратко"></div>
+              <div class="form-group"><label>Цена, ₽ *</label><input type="number" id="mi-price" placeholder="450" min="1" required></div>
+              <div class="form-group"><label>Вес</label><input type="text" id="mi-weight" placeholder="250 г"></div>
+              <button type="submit" class="btn btn-sm" id="menuSubmitBtn">Добавить</button>
+            </div>
+            <div class="form-group" style="margin-top:16px">
+              <label>Фото блюда (необязательно)</label>
+              <div class="image-upload">
+                <input type="file" id="mi-image-input" accept="image/*">
+                <label for="mi-image-input" class="image-preview" id="mi-image-preview"><span>📷 Нажмите, чтобы загрузить фото</span></label>
+                <button type="button" class="image-remove" id="mi-image-remove" style="display:none">✕ Удалить фото</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="admin-menu-list" id="adminMenuList"></div>
+      </div>
+
+      <div class="admin-tab-content" id="tab-reviews">
+        <div class="orders-filters" id="reviewsFilters"></div>
+        <div id="adminReviewsList"></div>
+      </div>
+
+      <div class="admin-tab-content" id="tab-news">
+        <div class="admin-form-card">
+          <h3 id="newsFormTitle">➕ Новая публикация</h3>
+          <form id="newsForm">
+            <div class="form-group"><label>Заголовок *</label><input type="text" id="news-title" placeholder="Заголовок" required></div>
+            <div class="form-group"><label>Текст *</label><textarea id="news-text" placeholder="Текст новости..."></textarea></div>
+            <div class="form-group">
+              <label>Фото (необязательно)</label>
+              <div class="image-upload">
+                <input type="file" id="news-image-input" accept="image/*">
+                <label for="news-image-input" class="image-preview" id="news-image-preview"><span>📷 Нажмите, чтобы загрузить фото</span></label>
+                <button type="button" class="image-remove" id="news-image-remove" style="display:none">✕ Удалить фото</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+                <input type="checkbox" id="news-published" checked style="width:20px;height:20px;accent-color:#c0392b">
+                Опубликовать сразу
+              </label>
+            </div>
+            <button type="submit" class="btn btn-sm" id="newsSubmitBtn">Опубликовать</button>
+          </form>
+        </div>
+        <div id="adminNewsList"></div>
+      </div>
+
+      <div class="admin-tab-content" id="tab-users">
+        <div class="access-info">
+          <b>Роли:</b> 👑 Админ — полный доступ · 💼 Менеджер — всё кроме пользователей · 📞 Оператор — только заказы · 📰 Новости — только новости
+        </div>
+        <div class="admin-form-card">
+          <h3 id="userFormTitle">➕ Добавить пользователя</h3>
+          <form id="userForm">
+            <div class="user-form-grid">
+              <div class="form-group"><label>Логин *</label><input type="text" id="u-login" placeholder="login" required></div>
+              <div class="form-group"><label>Пароль *</label><input type="text" id="u-password" placeholder="password" required></div>
+              <div class="form-group"><label>Имя *</label><input type="text" id="u-name" placeholder="Иван Иванов" required></div>
+              <div class="form-group"><label>Роль *</label>
+                <select id="u-role">
+                  <option value="manager">💼 Менеджер</option>
+                  <option value="operator">📞 Оператор</option>
+                  <option value="news">📰 Новости</option>
+                  <option value="admin">👑 Администратор</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-sm" id="userSubmitBtn">Добавить</button>
+            </div>
+          </form>
+        </div>
+        <div class="admin-users-list" id="adminUsersList"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="confirm-overlay" id="confirmOverlay">
+    <div class="confirm-box"><h3 id="confirmTitle"></h3><p id="confirmText"></p>
+      <div class="confirm-actions"><button class="btn btn-ghost btn-sm" id="confirmCancel">Отмена</button><button class="btn btn-sm" id="confirmOk" style="background:#c0392b;">OK</button></div>
+    </div>
+  </div>
+
+  <script src="shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Хачапури — Грузинская кухня</title>
+  <link rel="stylesheet" href="shared.css">
+</head>
+<body data-page="index">
+  <header>
+    <a href="index.html" class="logo">ХАЧА<span>ПУРИ</span></a>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">Главная</a></li>
+        <li><a href="menu.html">Меню</a></li>
+        <li><a href="news.html">Новости</a></li>
+        <li><a href="reviews.html">Отзывы</a></li>
+        <li><button class="cart-btn" id="openCart">🛒 <span>Корзина</span> <span class="badge" id="cartCount">0</span></button></li>
+        <li><a href="admin.html" class="admin-link" title="Панель управления">⚙️</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Вкус <span>Грузии</span> у вас дома</h1>
+    <p>Настоящие хачапури, сочные хинкали и ароматный шашлык по традиционным рецептам. Привезём горячим и с заботой.</p>
+    <a href="menu.html" class="btn">Смотреть меню</a>
+  </section>
+
+  <section class="preview-section">
+    <div class="preview-head">
+      <h2>Популярные блюда</h2>
+      <a href="menu.html">Всё меню →</a>
+    </div>
+    <div class="grid" id="previewMenu"></div>
+  </section>
+
+  <section class="preview-section">
+    <div class="preview-head">
+      <h2>Отзывы гостей</h2>
+      <a href="reviews.html">Все отзывы →</a>
+    </div>
+    <div class="reviews-grid" id="previewReviews"></div>
+  </section>
+
+  <div class="overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-head"><h3>Ваш заказ</h3><button class="close-btn" id="closeCart">×</button></div>
+    <div class="cart-body" id="cartBody"></div>
+    <div class="checkout" id="checkout" style="display:none;">
+      <div class="total-row"><span>Итого:</span><span class="sum" id="cartTotal">0 ₽</span></div>
+      <form id="orderForm">
+        <div class="form-group"><label>Имя *</label><input type="text" id="name" placeholder="Как к вам обращаться"></div>
+        <div class="form-group"><label>Телефон *</label><input type="tel" id="phone" placeholder="+7 (___) ___-__-__"></div>
+        <div class="form-group"><label>Адрес доставки *</label><input type="text" id="address" placeholder="ул., дом, квартира"></div>
+        <div class="form-group"><label>Комментарий</label><textarea id="comment" placeholder="Например: без лука"></textarea></div>
+        <button type="submit" class="btn submit-btn">Оформить доставку</button>
+      </form>
+    </div>
+    <div class="success-screen" id="successScreen">
+      <div class="check">✓</div><h3>Заказ принят!</h3>
+      <p id="successText">Мы позвоним для подтверждения.</p>
+      <button class="btn" id="closeSuccess">Отлично</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast"></div>
+
+  <footer>
+    <p><span class="brand">ХАЧАПУРИ</span> — Грузинская кухня, Якутск</p>
+    <div class="contacts">
+      <span>📞 <a href="tel:+74112000000">+7 (4112) 00-00-00</a></span>
+      <span>🕐 Ежедневно с 11:00 до 23:00</span>
+    </div>
+    <p style="margin-top:20px; opacity:.7;">© 2026 Хачапури</p>
+  </footer>
+
+  <div class="confirm-overlay" id="confirmOverlay">
+    <div class="confirm-box"><h3 id="confirmTitle"></h3><p id="confirmText"></p>
+      <div class="confirm-actions"><button class="btn btn-ghost btn-sm" id="confirmCancel">Отмена</button><button class="btn btn-sm" id="confirmOk" style="background:#c0392b;">OK</button></div>
+    </div>
+  </div>
+
+  <script src="shared.js"></script>
+</body>
+</html>
